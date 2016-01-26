@@ -148,16 +148,18 @@ pro plot_3_8
 N = 1024.
 D = 1
 !p.multi = [0,2,2]
-v_sample = (62.5e6) / float(D)
-;;;;;;change_frq, 0.1*(6.25e6)
+v_sample = (62.5) / float(D)
+change_frq, 0.1*(62.5e6)
 GETPICO, '1V', D, 1, tseries
 tseries = tseries[100:1123]
-time = time_3_2(N) - ((N/2.)/(v_sample))
-plot, time_3_2(N), tseries, psym = -4, xrange = [0,1e-4]
-xoutput = ((findgen(N)-(N/2.))*v_sample/N)
+time = findgen(1024)/(62.5) - ((N/2.)/v_sample)
+plot, time, tseries, psym = -4, xrange = [-2,2]
+print, time
+xoutput = (findgen(N)-(N/2.))*(v_sample/N)
+;print, xoutput
 dft, time, tseries, xoutput, youtput
-plot, xoutput, (abs(youtput))^2, psym = -4, charsize = 1.8;, xrange = [-5e6,5e6]
+plot, xoutput, (abs(youtput))^2, psym = -4, charsize = 1.8
 plot, xoutput, real_part(youtput), psym = -4
 plot, xoutput, imaginary(youtput), psym = -4
-
+save, tseries, time, xoutput, filename = 'week_1_3_8.sav'
 end
