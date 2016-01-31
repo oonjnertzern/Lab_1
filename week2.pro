@@ -151,36 +151,68 @@ end
 
 pro get_5_3_add_0deg
 ;sample & save data for 0 degree phase shifted output, +delta v (positive)
-  N = 2048.
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   tseries2D = getpico_dual()
   help, tseries2D
   sig = tseries2D[*,0]
   shift = tseries2D[*,1]
   tseries = complex(sig, shift)
-  plot, sig[100:N+99]
-  oplot, shift[100:N+99]
-  save, sig, shift, tseries, filename = 'week_2_5_3_add_0deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "USB graph for 0 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  time  = (findgen(N)/v_sample)
+  xinput = time
+  yinput = tseries
+  xoutput = ((findgen(N) - (N/2.))*v_sample/N)
+  dft, xinput, yinput, xoutput, youtput
+  power = (abs(youtput))^2
+  plot, xoutput, power
+  save, sig, shift, tseries, xinput, yinput, xoutput, youtput, power, filename = 'week_2_5_3_add_0deg.sav'
 end
 
 pro restore_5_3_add_0deg
+;restore & plot for 0 degree phase shifted signals, +delta v (positive)
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   restore, 'week_2_5_3_add_0deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "USB graph for 0 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  plot, xoutput, power
 end
 
 pro get_5_3_subtract_0deg
 ;sample & save data for 0 degree phase shifted output, -delta v (negative)
-  N = 2048.
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   tseries2D = getpico_dual()
   help, tseries2D
   sig = tseries2D[*,0]
   shift = tseries2D[*,1]
   tseries = complex(sig, shift)
-  plot, sig[100:N+99]
-  oplot, shift[100:N+99]
-  save, sig, shift, tseries, filename = 'week_2_5_3_subtract_0deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "LSB graph for 0 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  time  = (findgen(N)/v_sample)
+  xinput = time
+  yinput = tseries
+  xoutput = ((findgen(N) - (N/2.))*v_sample/N)
+  dft, xinput, yinput, xoutput, youtput
+  power = (abs(youtput))^2
+  plot, xoutput, power
+  save, sig, shift, tseries, xinput, yinput, xoutput, youtput, power, filename = 'week_2_5_3_subtract_0deg.sav'
 end
 
 pro restore_5_3_subtract_0deg
+;restore & plot for 0 degree phase shifted signals, -delta v (negative)
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   restore, 'week_2_5_3_subtract_0deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "LSB graph for 0 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  plot, xoutput, power
 end
 
 pro get_5_3_add_90deg
@@ -193,8 +225,8 @@ pro get_5_3_add_90deg
   sig = tseries2D[*,0]
   shift = tseries2D[*,1]
   tseries = complex(sig, shift)
-  plot, sig[100:N+99], color = !yellow
-  oplot, shift[100:N+99], color = !blue
+  plot, sig[100:N+99], color = !yellow, title = "USB graph for 90 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
   time  = (findgen(N)/v_sample)
   xinput = time
   yinput = tseries
@@ -206,23 +238,47 @@ pro get_5_3_add_90deg
 end
 
 pro restore_5_3_add_90deg
+;restore & plot for 90 degree phase shifted signals, +delta v (positive)
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   restore, 'week_2_5_3_add_90deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "USB graph for 90 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  plot, xoutput, power
 end
 
 pro get_5_3_subtract_90deg
 ;sample & save data for 90 degree phase shifted output, -delta v (negative)
-  N = 2048.
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   tseries2D = getpico_dual()
   help, tseries2D
   sig = tseries2D[*,0]
   shift = tseries2D[*,1]
   tseries = complex(sig, shift)
-  plot, sig[100:N+99]
-  oplot, shift[100:N+99]
-  save, sig, shift, tseries, filename = 'week_2_5_3_subtract_90deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "LSB graph for 90 degre phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  time  = (findgen(N)/v_sample)
+  xinput = time
+  yinput = tseries
+  xoutput = ((findgen(N) - (N/2.))*v_sample/N)
+  dft, xinput, yinput, xoutput, youtput
+  power = (abs(youtput))^2
+  plot, xoutput, power
+  save, sig, shift, tseries, xinput, yinput, xoutput, youtput, power, filename = 'week_2_5_3_subtract_90deg.sav'
+  
 end
 
 pro restore_5_3_subtract_90deg
+;restore & plot for 90 degree phase shifted signals, -delta v (negative)
+  !p.multi = [0,1,2]
+  N = 1024.
+  v_sample = 62.5e6
   restore, 'week_2_5_3_subtract_90deg.sav'
+  plot, sig[100:N+99], color = !yellow, title = "LSB graph for 90 degree phase shift. Real: white. Imaginary: blue dotted"
+  oplot, shift[100:N+99], color = !blue, psym = 4
+  plot, xoutput, power
 end
 
