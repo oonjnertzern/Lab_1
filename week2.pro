@@ -162,7 +162,7 @@ pro restore_5_2_power_add
 end
 
 pro get_5_3_add_0deg
-;for v_rf = 11.025 MHz, v_lo = 10.5 MHz
+;for v_rf = 10.5 MHz, v_lo = 10 MHz
 ;sample & save data for 0 degree phase shifted output, +delta v (positive)
   !p.multi = [0,1,2]
   N = 1024.
@@ -184,7 +184,7 @@ pro get_5_3_add_0deg
 end
 
 pro restore_5_3_add_0deg
-;for v_rf = 11.025 MHz, v_lo = 10.5 MHz
+;for v_rf = 10.5 MHz, v_lo = 10 MHz
 ;restore & plot for 0 degree phase shifted signals, +delta v (positive)
   !p.multi = [0,1,2]
   N = 1024.
@@ -196,7 +196,7 @@ pro restore_5_3_add_0deg
 end
 
 pro get_5_3_subtract_0deg
-;for v_rf = 9.975 MHz, v_lo = 10.5 MHz
+;for v_rf = 9.5 MHz, v_lo = 10 MHz
 ;sample & save data for 0 degree phase shifted output, -delta v (negative)
   !p.multi = [0,1,2]
   N = 1024.
@@ -218,7 +218,7 @@ pro get_5_3_subtract_0deg
 end
 
 pro restore_5_3_subtract_0deg
-;for v_rf = 9.975 MHz, v_lo = 10.5 MHz
+;for v_rf = 9.5 MHz, v_lo = 10 MHz
 ;restore & plot for 0 degree phase shifted signals, -delta v (negative)
   !p.multi = [0,1,2]
   N = 1024.
@@ -230,7 +230,7 @@ pro restore_5_3_subtract_0deg
 end
 
 pro get_5_3_add_90deg
-;for v_rf = 11.025 MHz, v_lo = 10.5 MHz
+;for v_rf = 10.5 MHz, v_lo = 10 MHz
 ;sample & save data for 90 degree phase shifted output, +delta v (positive)
   !p.multi = [0,1,2]
   N = 1024.
@@ -252,7 +252,7 @@ pro get_5_3_add_90deg
 end
 
 pro restore_5_3_add_90deg
-;for v_rf = 11.025 MHz, v_lo = 10.5 MHz
+;for v_rf = 10.5 MHz, v_lo = 10 MHz
 ;restore & plot for 90 degree phase shifted signals, +delta v (positive)
   !p.multi = [0,1,2]
   N = 1024.
@@ -264,7 +264,7 @@ pro restore_5_3_add_90deg
 end
 
 pro get_5_3_subtract_90deg
-;for v_rf = 9.975 MHz, v_lo = 10.5 MHz
+;for v_rf = 9.5 MHz, v_lo = 10 MHz
 ;sample & save data for 90 degree phase shifted output, -delta v (negative)
   !p.multi = [0,1,2]
   N = 1024.
@@ -286,7 +286,7 @@ pro get_5_3_subtract_90deg
 end
 
 pro restore_5_3_subtract_90deg
-;for v_rf = 9.975 MHz, v_lo = 10.5 MHz
+;for v_rf = 9.5 MHz, v_lo = 10 MHz
 ;restore & plot for 90 degree phase shifted signals, -delta v (negative)
   !p.multi = [0,1,2]
   N = 1024.
