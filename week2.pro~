@@ -1,0 +1,20 @@
+;____________________________________________________________
+;
+;                           Week 2
+;____________________________________________________________
+
+function getpico
+  GETPICO, '1V', 1, 1, tseries, vmult=vmult
+  return, tseries
+end
+
+pro get_5_1
+  tseries = getpico()
+  plot, tseries[100:3000]
+  save, tseries, vmult, filename = 'week_2_5_1.sav'
+end
+
+pro restore_5_1
+  restore, 'week_2_5_1.sav'
+  plot, tseries[100:3000]
+end
