@@ -39,7 +39,7 @@ pro restore_plot_3_2, a
 ;restore and plot tseries for v_sig/v_sample = ratio given by 'a'
   ratio = a*0.1
   restore, 'week_1_3_2_' + strcompress(string(ratio), /remove_all) +'.sav'
-  plot, time, tseries, psym = -4, charsize = 1.5, title = 'voltage vs. time for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'voltage (V)', xtitle = 'time (microseconds)'
+  plot, time, tseries, psym = -4, charsize = 1.5, title = textoidl("Voltage vs. Time for \nu_{signal}/\nu_{sample} = ") + strcompress(string(ratio), /remove_all), ytitle = 'Voltage (V)', xtitle = 'Time (microseconds)'
 end
 
 pro plot_3_2_ft, a
@@ -65,7 +65,9 @@ pro restore_plot_3_2_ft, a
 ;restore and plot DFT for v_sig/v_sample = ratio given by 'a'
   ratio = a *0.1
   restore, 'week_1_3_2_ft_'+strcompress(string(ratio), /remove_all)+'.sav'
-  plot, xoutput, youtput, psym = -4, charsize = 1.5, title = 'Power Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'power', xtitle = 'frequency (MegaHz)'
+ps_ch, 'week_1_3_2_ft_'+strcompress(string(ratio), /remove_all)+'.ps', xsize=10, ysize=8, /color
+  plot, xoutput, youtput, psym = -4, charsize = 1.5, title = 'Power Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'Power', xtitle = 'Frequency (MegaHz)'
+ps_ch, /close
 end
 
 pro plot_3_3_equal
@@ -82,7 +84,7 @@ end
 pro restore_plot_3_3_equal
 ;restore and plot tseries for v_sig = v_sample
   restore, 'week_1_3_3_equal.sav'
-  plot, time, tseries, psym = -4, charsize = 1.5, title = 'voltage vs. time for v_signal=v_sample', ytitle = 'voltage (V)', xtitle = 'time (microseconds)'
+  plot, time, tseries, psym = -4, charsize = 1.5, title = 'voltage vs. time for v_signal=v_sample', ytitle = 'Voltage (V)', xtitle = 'Time (microseconds)'
 end
 
 pro plot_3_3_large
@@ -97,7 +99,7 @@ end
 pro restore_plot_3_3_large
 ;restore and plot tseries for v_sig/v_sample really large
   restore, 'week_1_3_3_large.sav'
-  plot, time, tseries[100:227], psym = -4, charsize = 1.5, title = 'voltage vs. time for v_signal/v_sample >> 1', ytitle = 'voltage (V)', xtitle = 'time (microseconds)'
+  plot, time, tseries[100:227], psym = -4, charsize = 1.5, title = 'voltage vs. time for v_signal/v_sample >> 1', ytitle = 'Voltage (V)', xtitle = 'Time (microseconds)'
 end
 
 pro plot_3_4_vs, a
@@ -113,8 +115,8 @@ pro plot_3_4_vs, a
   yinput = tseries_3_2(10) ;getpico with divisor = 10 (v_sample = 6.25 MHz)
   xoutput = ((findgen(N)-(N/2.))*v_sample/N) ;set and center output frequencies
   dft,  xinput, yinput, xoutput, youtput
-  plot, xoutput*1e-6, real_part(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'real values', xtitle = 'frequency (MegaHz)'
-  plot, xoutput*1e-6, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'imaginary values', xtitle = 'frequency (MegaHz)'
+  plot, xoutput*1e-6, real_part(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'Real Values', xtitle = 'Frequency (MegaHz)'
+  plot, xoutput*1e-6, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'Imaginary Values', xtitle = 'Frequency (MegaHz)'
   xoutput = xoutput*1e-6
   save, xinput, yinput, xoutput, youtput, filename = 'week_1_3_4_vs_'+strcompress(string(ratio), /remove_all)+'.sav'
 end
@@ -124,8 +126,8 @@ pro restore_plot_3_4_vs, a
   !p.multi = [0,1,2]
   ratio = a*0.1
   restore, 'week_1_3_4_vs_'+strcompress(string(ratio), /remove_all)+'.sav'
-  plot, xoutput, real_part(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'real values', xtitle = 'frequency (MegaHz)'
-  plot, xoutput, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'imaginary values', xtitle = 'frequency (MegaHz)'
+  plot, xoutput, real_part(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'Real Values', xtitle = 'Frequency (MegaHz)'
+  plot, xoutput, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Voltage Spectrum for v_signal/v_sample = ' + strcompress(string(ratio), /remove_all), ytitle = 'Imaginary Values', xtitle = 'Frequency (MegaHz)'
 end
 
 pro plot_3_5_triangle
@@ -148,8 +150,8 @@ pro restore_plot_3_5_triangle
 ;restore and plot tseries and power spectrum for triangle wave
   !p.multi = [0,1,2]
   restore, 'week_1_3_5_triangle.sav'
- plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'time (second)', ytitle = 'voltage (V)', title = 'voltage vs. time for triangle wave'
- plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'frequency (kHz)', ytitle = 'power', title = 'Power Spectrum for Triangle Wave'
+ plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'Time (second)', ytitle = 'Voltage (V)', title = 'Voltage vs. Time for Triangle Wave'
+ plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Triangle Wave'
 end
 
 pro plot_3_5_square
@@ -172,8 +174,8 @@ pro restore_plot_3_5_square
 ;restore and plot tseries and power spectrum for square wave
  !p.multi = [0,1,2]
  restore, 'week_1_3_5_square.sav'
- plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'time (second)', ytitle = 'voltage (V)', title = 'voltage vs. time for square wave'
- plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'frequency (kHz)', ytitle = 'power', title = 'Power Spectrum for Square Wave'
+ plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'Time (second)', ytitle = 'Voltage (V)', title = 'Voltage vs. Time for Square Wave'
+ plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Square Wave'
 end
 
 pro plot_3_6_square
@@ -187,9 +189,9 @@ pro plot_3_6_square
   xinput = time[0:127] - ((N/2.)/(v_sample)) ;center time input for DFT
   xoutput = ((findgen(N)-(N/2.))*v_sample/N) ;set and center output frequencies
   dft, xinput, tseries, xoutput, youtput
-  plot, xinput, tseries, psym = -4, charsize = 1.5, title = 'voltage vs. time for square wave', xtitle = 'time (second)', ytitle = 'voltage (V)'
-  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 1.5, title = 'Real Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
+  plot, xinput, tseries, psym = -4, charsize = 1.5, title = 'Voltage vs. Time for Square Wave', xtitle = 'Time (second)', ytitle = 'Voltage (V)'
+  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 1.5, title = 'Real Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
   
 ;filter out any frequencies smaller than -1000 Hz or greater than 1000
 ;Hz by setting them to zero
@@ -200,11 +202,11 @@ youtput1 = youtput
      endif
   endfor
 
-  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 1.5, title = 'Real Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
+  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 1.5, title = 'Real Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
 
   dft, xoutput, youtput1, xinput, filtered_y, /inverse
-  plot, xinput, filtered_y, psym = -4, charsize = 1.5, title = 'Fourier Filtered Square Wave', xtitle = 'time (second)', ytitle = 'voltage (V)'
+  plot, xinput, filtered_y, psym = -4, charsize = 1.5, title = 'Fourier Filtered Square Wave', xtitle = 'Time (second)', ytitle = 'Voltage (V)'
   save, time, tseries, xinput, xoutput, youtput, filtered_y, youtput1, filename = 'week_1_3_6_square_wave.sav'
 end
 
@@ -213,12 +215,12 @@ pro restore_plot_3_6_square
 ;imaginary part, and filtered square wave
   !p.multi = [0,3,2]
   restore, 'week_1_3_6_square_wave.sav'
-  plot, xinput*1e3, tseries, psym = -4, charsize = 2, title = 'voltage vs. time for square wave', xtitle = 'time (millisecond)', ytitle = 'voltage (V)'
-  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 2, title = 'Real Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 2, title = 'Imaginary Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
-  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 2, title = 'Real Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 2, title = 'Imaginary Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
-  plot, xinput*1e3, filtered_y, psym = -4, charsize = 2, title = 'Fourier Filtered Square Wave', xtitle = 'time (millisecond)', ytitle = 'voltage'
+  plot, xinput*1e3, tseries, psym = -4, charsize = 2, title = 'Voltage vs. Time for Square Wave', xtitle = 'Time (millisecond)', ytitle = 'Voltage (V)'
+  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 2, title = 'Real Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 2, title = 'Imaginary Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
+  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 2, title = 'Real Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 2, title = 'Imaginary Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
+  plot, xinput*1e3, filtered_y, psym = -4, charsize = 2, title = 'Fourier Filtered Square Wave', xtitle = 'Time (millisecond)', ytitle = 'Voltage'
 end
 
 pro plot_3_6_triangle
@@ -258,12 +260,12 @@ pro restore_plot_3_6_triangle
 ;imaginary part, and filtered triangle wave
   !p.multi = [0,3,2]
   restore, 'week_1_3_6_triangle_wave.sav'
-  plot, xinput*1e3, tseries, psym = -4, charsize = 2, title = 'voltage vs. time for triangle wave', xtitle = 'time (millisecond)', ytitle = 'voltage (V)'
-  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 2, title = 'Real Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 2, title = 'Imaginary Part of DFT', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
-  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 2, title = 'Real Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'real values'
-  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 2, title = 'Imaginary Part of DFT Filtered', xtitle = 'frequency (kHz)', ytitle = 'imaginary values'
-  plot, xinput*1e3, filtered_y, psym = -4, charsize = 2, title = 'Fourier Filtered Triangle Wave', xtitle = 'time (millisecond)', ytitle = 'voltage (V)'
+  plot, xinput*1e3, tseries, psym = -4, charsize = 2, title = 'Voltage vs. Time for Triangle Wave', xtitle = 'Time (millisecond)', ytitle = 'Voltage (V)'
+  plot, xoutput/1000, real_part(youtput), psym = -4, charsize = 2, title = 'Real Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput), psym = -4, charsize = 2, title = 'Imaginary Part of DFT', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
+  plot, xoutput/1000, real_part(youtput1), psym = -4, charsize = 2, title = 'Real Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Real Values'
+  plot, xoutput/1000, imaginary(youtput1), psym = -4, charsize = 2, title = 'Imaginary Part of DFT Filtered', xtitle = 'Frequency (kHz)', ytitle = 'Imaginary Values'
+  plot, xinput*1e3, filtered_y, psym = -4, charsize = 2, title = 'Fourier Filtered Triangle Wave', xtitle = 'Time (millisecond)', ytitle = 'Voltage (V)'
 end
 
 pro plot_3_7
@@ -289,10 +291,10 @@ pro restore_plot_3_7
 ;restore and plot leakage power
  !p.multi = [0,2,2]
  restore, 'week_1_3_7.sav'
- plot, time, tseries, psym = -4, xrange = [-2,2], charsize = 1.5, title = 'voltage vs. time', xtitle = 'time (microsec)', ytitle = 'voltage (V)'
- plot, xoutput, (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power', xrange = [2,10], yrange = [0,100]
- plot, xoutput, real_part(youtput), psym = -4, charsize = 1.5, title = 'Real Part of DFT', xtitle = 'frequency (MHz)', ytitle = 'real values'
- plot, xoutput, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT', xtitle = 'frequency (MHz)', ytitle = 'imaginary values'
+ plot, time, tseries, psym = -4, xrange = [-2,2], charsize = 1.5, title = 'Voltage vs. Time', xtitle = 'Time (microsec)', ytitle = 'Voltage (V)'
+ plot, xoutput, (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power', xrange = [2,10], yrange = [0,100]
+ plot, xoutput, real_part(youtput), psym = -4, charsize = 1.5, title = 'Real Part of DFT', xtitle = 'Frequency (MHz)', ytitle = 'Real Values'
+ plot, xoutput, imaginary(youtput), psym = -4, charsize = 1.5, title = 'Imaginary Part of DFT', xtitle = 'Frequency (MHz)', ytitle = 'Imaginary Values'
 end
 
 pro plot_3_8
@@ -305,7 +307,7 @@ getpico, '1V', D, 1,  tseries
 time = (findgen(N) - (N/2.)) / v_sample ;center time input for DFT
 xoutput = (findgen(N) - (N/2.))*(v_sample/N) ;set and center frequency inputs
 dft, time, tseries, xoutput, youtput
-plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power'
+plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power'
 save, tseries, time, xoutput, youtput, filename = 'week_1_3_8_ratio4.sav'
 end
 
@@ -313,11 +315,11 @@ pro restore_plot_3_8
 ;restore and plot frequency resolution
  !p.multi = [0,2,2]
  restore, 'week_1_3_8_ratio1.sav'
- plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power'
+ plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power'
  restore, 'week_1_3_8_ratio2.sav'
- plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power'
+ plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power'
  restore, 'week_1_3_8_ratio3.sav'
- plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power'
+ plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power'
  restore, 'week_1_3_8_ratio4.sav'
- plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'frequency (MHz)', ytitle = 'power'
+ plot, xoutput/(1e6), (abs(youtput))^2, psym = -4, charsize = 1.5, title = 'Power Spectrum', xtitle = 'Frequency (MHz)', ytitle = 'Power'
 end
