@@ -151,7 +151,7 @@ pro restore_plot_3_5_triangle
   !p.multi = [0,1,2]
   restore, 'week_1_3_5_triangle.sav'
  plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'Time (second)', ytitle = 'Voltage (V)', title = 'Voltage vs. Time for Triangle Wave'
- plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Triangle Wave'
+ plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Triangle Wave';, yrange = [0,500]
 end
 
 pro plot_3_5_square
@@ -175,7 +175,7 @@ pro restore_plot_3_5_square
  !p.multi = [0,1,2]
  restore, 'week_1_3_5_square.sav'
  plot, time[0:127], tseries, psym = -4, charsize = 1.5, xtitle = 'Time (second)', ytitle = 'Voltage (V)', title = 'Voltage vs. Time for Square Wave'
- plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Square Wave'
+ plot, xoutput/1000, (abs(youtput))^2, psym = -4, charsize = 1.5, xtitle = 'Frequency (kHz)', ytitle = 'Power', title = 'Power Spectrum for Square Wave';, yrange = [0,1000]
 end
 
 pro plot_3_6_square
